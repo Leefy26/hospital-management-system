@@ -3,17 +3,42 @@
 <html>
 <head>
     <title>药品信息管理</title>
-    <style> /* 省略部分通用样式 */
-    table { border-collapse: collapse; width: 90%; margin: 20px auto; }
-    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-    th { background-color: #f2f2f2; }
-    a { text-decoration: none; margin-right: 10px; }
-    .add-btn { display:block; width: 120px; margin: 20px auto; padding: 10px; text-align: center; background-color: #17a2b8; color: white; border-radius: 5px;}
+    <style>
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px 0;
+        }
+        .page-header h2 {
+            margin: 0;
+        }
+        .header-btn {
+            text-decoration: none;
+            padding: 8px 15px;
+            color: white;
+            border-radius: 5px;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        .btn-back {
+            background-color: #6c757d;
+        }
+        .btn-add {
+            background-color: #007bff;
+        }
+        table { border-collapse: collapse; width: 90%; margin: 20px auto; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        a { text-decoration: none; margin-right: 10px; }
     </style>
 </head>
 <body>
-<h2 style="text-align: center;">药品信息列表</h2>
-<a href="/medicine/add" class="add-btn">新增药品</a>
+<div class="page-header">
+    <a href="/admin/dashboard" class="header-btn btn-back">返回主页</a>
+    <h2>药品信息列表</h2>
+    <a href="/medicine/add" class="header-btn btn-add">新增药品</a>
+</div>
 <table>
     <tr>
         <th>ID</th>

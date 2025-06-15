@@ -3,17 +3,42 @@
 <html>
 <head>
     <title>科室信息管理</title>
-    <style> /* 简单美化一下表格 */
+    <style>
+    .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 20px 0;
+    }
+    .page-header h2 {
+        margin: 0;
+    }
+    .header-btn {
+        text-decoration: none;
+        padding: 8px 15px;
+        color: white;
+        border-radius: 5px;
+        font-size: 14px;
+        white-space: nowrap;
+    }
+    .btn-back {
+        background-color: #6c757d;
+    }
+    .btn-add {
+        background-color: #007bff;
+    }
     table { border-collapse: collapse; width: 80%; margin: 20px auto; }
     th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
     th { background-color: #f2f2f2; }
     a { text-decoration: none; margin-right: 10px; }
-    .add-btn { display:block; width: 120px; margin: 20px auto; padding: 10px; text-align: center; background-color: #4CAF50; color: white; }
     </style>
 </head>
 <body>
-<h2 style="text-align: center;">科室列表</h2>
-<a href="/department/add" class="add-btn">新增科室</a>
+<div class="page-header">
+    <a href="/admin/dashboard" class="header-btn btn-back">返回主页</a>
+    <h2>科室列表</h2>
+    <a href="/department/add" class="header-btn btn-add">新增科室</a>
+</div>
 <table>
     <tr>
         <th>ID</th>

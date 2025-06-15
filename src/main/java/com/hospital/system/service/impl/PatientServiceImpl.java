@@ -34,4 +34,9 @@ public class PatientServiceImpl implements PatientService {
     public void deleteById(Integer id) {
         patientRepository.deleteById(id);
     }
+
+    @Override
+    public List<Patient> findByDoctorId(Integer doctorId) {
+        return patientRepository.findByDoctorId(doctorId);
+    }
 }

@@ -4,19 +4,44 @@
 <head>
     <title>检验项目管理</title>
     <style>
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px 0;
+        }
+        .page-header h2 {
+            margin: 0;
+        }
+        .header-btn {
+            text-decoration: none;
+            padding: 8px 15px;
+            color: white;
+            border-radius: 5px;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        .btn-back {
+            background-color: #6c757d;
+        }
+        .btn-add {
+            background-color: #007bff;
+        }
         body { font-family: sans-serif; }
         table { border-collapse: collapse; width: 80%; margin: 20px auto; }
         th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
         th { background-color: #f2f2f2; }
         a { text-decoration: none; margin-right: 10px; }
         .container { width: 90%; margin: auto; }
-        .add-btn { display:block; width: 150px; margin: 20px auto; padding: 10px; text-align: center; background-color: #fd7e14; color: white; border-radius: 5px;}
     </style>
 </head>
 <body>
 <div class="container">
-    <h2 style="text-align: center;">检验项目列表</h2>
-    <a href="/labitem/add" class="add-btn">新增检验项目</a>
+    <div class="page-header">
+        <a href="/admin/dashboard" class="header-btn btn-back">返回主页</a>
+        <h2>检验项目列表</h2>
+        <a href="/labitem/add" class="header-btn btn-add">新增检验项目</a>
+    </div>
     <table>
         <tr>
             <th>ID</th>

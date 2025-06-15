@@ -9,4 +9,6 @@ public interface DoctorService {
     Optional<Doctor> findById(Integer id);
     Doctor save(Doctor doctor);
     void deleteById(Integer id);
+    void createDoctorAndUser(Doctor doctor, String username, String password);
+
 }

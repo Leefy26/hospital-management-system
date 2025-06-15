@@ -61,6 +61,6 @@ public class AdmissionController {
             return "redirect:/admission/register";
         }
         // 成功后，重定向到一个病人列表页面（我们未来会创建）
-        return "redirect:/patient/list"; // 假设未来有这个页面
+        return "redirect:/admin/dashboard";
     }
 }

@@ -17,6 +17,7 @@ DROP TABLE IF EXISTS `departments`;
 DROP TABLE IF EXISTS `wards`;
 DROP TABLE IF EXISTS `lab_items`;
 DROP TABLE IF EXISTS `medicines`;
+DROP TABLE IF EXISTS `users`;
 SET FOREIGN_KEY_CHECKS = 1;
 
 -- ----------------------------
@@ -36,3 +37,15 @@ CREATE TABLE `patients` ( `id` INT PRIMARY KEY AUTO_INCREMENT, `name` VARCHAR(50
 CREATE TABLE `prescriptions` ( `id` INT PRIMARY KEY AUTO_INCREMENT, `patient_id` INT NOT NULL, `doctor_id` INT, `diagnosis` TEXT, `created_at` DATETIME NOT NULL, `total_fee` DECIMAL(10, 2), FOREIGN KEY (`patient_id`) REFERENCES `patients`(`id`), FOREIGN KEY (`doctor_id`) REFERENCES `doctors`(`id`) ) COMMENT='处方主表';
 CREATE TABLE `patient_lab_tests` ( `id` INT PRIMARY KEY AUTO_INCREMENT, `patient_id` INT NOT NULL, `doctor_id` INT, `lab_item_id` INT NOT NULL, `test_time` DATETIME NOT NULL, `result` TEXT, `fee` DECIMAL(10, 2) NOT NULL, FOREIGN KEY (`patient_id`) REFERENCES `patients`(`id`), FOREIGN KEY (`doctor_id`) REFERENCES `doctors`(`id`), FOREIGN KEY (`lab_item_id`) REFERENCES `lab_items`(`id`) ) COMMENT='病人检验记录表';
 CREATE TABLE `prescription_details` ( `id` INT PRIMARY KEY AUTO_INCREMENT, `prescription_id` INT NOT NULL, `medicine_id` INT NOT NULL, `quantity` INT NOT NULL, `notes` VARCHAR(255), `subtotal` DECIMAL(10, 2) NOT NULL, FOREIGN KEY (`prescription_id`) REFERENCES `prescriptions`(`id`), FOREIGN KEY (`medicine_id`) REFERENCES `medicines`(`id`) ) COMMENT='处方详情表';
+
+-- 4. 用户表 (系统用户)
+CREATE TABLE `users` (
+                         `id` INT PRIMARY KEY AUTO_INCREMENT,
+                         `username` VARCHAR(50) NOT NULL UNIQUE COMMENT '用户名',
+                         `password` VARCHAR(100) NOT NULL COMMENT '加密后的密码',
+                         `role` VARCHAR(50) NOT NULL COMMENT '角色 (如: ROLE_ADMIN, ROLE_DOCTOR)',
+                         `enabled` BOOLEAN NOT NULL DEFAULT TRUE COMMENT '账户是否启用'
+) COMMENT='系统用户表';
+
+ALTER TABLE `doctors` ADD COLUMN `user_id` INT UNIQUE;
+ALTER TABLE `doctors` ADD CONSTRAINT `fk_doctor_user` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`);

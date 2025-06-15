@@ -1,6 +1,6 @@
 package com.hospital.system.controller;
 
-import com.hospital.system.entity.Patient;
+import com.hospital.system.entity.*;
 import com.hospital.system.service.PatientService;
 import com.hospital.system.service.DischargeService;
 import com.hospital.system.dto.DischargeSummaryDTO;
@@ -11,13 +11,14 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.hospital.system.repository.PrescriptionRepository;
 import com.hospital.system.repository.PatientLabTestRepository;
-import com.hospital.system.entity.Prescription;
-import com.hospital.system.entity.PatientLabTest;
 
 import java.math.BigDecimal;
 import java.util.Optional;
 import java.util.List;
-
+import com.hospital.system.repository.DoctorRepository;
+import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.Optional;
 @Controller
 @RequestMapping("/patient")
 public class PatientController {
@@ -25,12 +26,45 @@ public class PatientController {
     @Autowired
     private PatientService patientService;
 
-    // 处理 GET /patient/list 请求，显示所有病人列表
+    @Autowired
+    private DoctorRepository doctorRepository;
+
     @GetMapping("/list")
-    public String listPatients(Model model) {
-        List<Patient> patientList = patientService.findAll();
+    public String listPatients(Model model, HttpSession session) {
+        User loggedInUser = (User) session.getAttribute("loggedInUser");
+
+        if (loggedInUser == null) {
+            return "redirect:/login";
+        }
+
+        List<Patient> patientList;
+
+        // 核心逻辑：判断角色
+        if ("ROLE_DOCTOR".equals(loggedInUser.getRole())) {
+            Optional<Doctor> doctorOpt = doctorRepository.findByUserId(loggedInUser.getId());
+
+            if (doctorOpt.isPresent()) {
+                Doctor doctor = doctorOpt.get();
+
+                // 【【【 新增代码 】】】
+                // 将医生本人信息也放入模型，以便在页面上显示
+                model.addAttribute("currentDoctor", doctor);
+
+                // 查询该医生的病人列表
+                patientList = patientService.findByDoctorId(doctor.getId());
+            } else {
+                patientList = new ArrayList<>();
+                model.addAttribute("errorMessage", "未找到与您账户关联的医生信息！");
+            }
+        } else if ("ROLE_ADMIN".equals(loggedInUser.getRole())) {
+            // 管理员逻辑保持不变
+            patientList = patientService.findAll();
+        } else {
+            patientList = new ArrayList<>();
+        }
+
         model.addAttribute("patientList", patientList);
-        return "patient_list"; // 返回视图名 patient_list.jsp
+        return "patient_list";
     }
 
     @Autowired

@@ -4,10 +4,12 @@ import com.hospital.system.entity.Department;
 import com.hospital.system.entity.Doctor;
 import com.hospital.system.service.DepartmentService;
 import com.hospital.system.service.DoctorService;
+import com.hospital.system.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.Optional;
@@ -41,10 +43,21 @@ public class DoctorController {
         return "doctor_form";
     }
 
-    // 保存新增的医生
+    @Autowired
+    private UserService userService;
+
     @PostMapping("/add")
-    public String addDoctor(@ModelAttribute Doctor doctor) {
-        doctorService.save(doctor);
+    public String addDoctor(@ModelAttribute Doctor doctor,
+                            @RequestParam String username,
+                            @RequestParam String password,
+                            RedirectAttributes redirectAttributes) {
+        try {
+            // 我们将在下一步创建一个新的 Service 方法来处理这个复杂逻辑
+            doctorService.createDoctorAndUser(doctor, username, password);
+            redirectAttributes.addFlashAttribute("successMessage", "医生 " + doctor.getName() + " 及登录账户创建成功！");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage", "创建失败: " + e.getMessage());
+        }
         return "redirect:/doctor/list";
     }
 

@@ -9,4 +9,6 @@ public interface PatientService {
     Optional<Patient> findById(Integer id);
     Patient save(Patient patient);
     void deleteById(Integer id);
+
+    List<Patient> findByDoctorId(Integer doctorId);
 }

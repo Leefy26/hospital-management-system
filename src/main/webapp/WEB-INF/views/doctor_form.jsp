@@ -17,14 +17,20 @@
     <c:if test="${action == 'edit'}">
         <input type="hidden" name="id" value="${doctor.id}">
     </c:if>
+
+    <!-- 医生姓名 -->
     <div>
         <label for="name">医生姓名:</label>
         <input type="text" id="name" name="name" value="${doctor.name}" required>
     </div>
+
+    <!-- 职称 -->
     <div>
         <label for="title">职　　称:</label>
         <input type="text" id="title" name="title" value="${doctor.title}">
     </div>
+
+    <!-- 所属科室 -->
     <div>
         <label for="department">所属科室:</label>
         <select id="department" name="department.id" required>
@@ -36,9 +42,22 @@
             </c:forEach>
         </select>
     </div>
+
+    <!-- 只在新增时显示 -->
+    <c:if test="${action == 'add'}">
+        <hr>
+        <div>
+            <label for="username">登录用户名:</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        <div>
+            <label for="password">初始密码:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+    </c:if>
+
+    <!-- 提交按钮 -->
     <div>
         <input type="submit" value="${action == 'add' ? '确认新增' : '确认修改'}">
     </div>
 </form>
-</body>
-</html>

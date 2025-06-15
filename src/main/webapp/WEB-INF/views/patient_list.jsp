@@ -5,6 +5,37 @@
 <head>
     <title>病人信息列表</title>
     <style>
+        /* 请将这些新样式添加到 <style> 标签内 */
+        .doctor-info-card {
+            background-color: #e9f5ff;
+            border: 1px solid #b3d7ff;
+            border-radius: 8px;
+            padding: 15px 25px;
+            margin-bottom: 20px;
+            position: relative; /* 为了登出按钮定位 */
+        }
+        .doctor-info-card h3 {
+            margin: 0 0 10px 0;
+            color: #004085;
+        }
+        .doctor-info-card p {
+            margin: 0;
+            color: #31708f;
+        }
+        .doctor-name {
+            color: #0056b3;
+            font-weight: bold;
+        }
+        .logout-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 5px 10px;
+            background-color: #6c757d;
+            color: white;
+            border-radius: 5px;
+            font-size: 12px;
+        }
         body { font-family: sans-serif; }
         table { border-collapse: collapse; width: 95%; margin: 20px auto; font-size: 14px; }
         th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
@@ -18,9 +49,22 @@
 </head>
 <body>
 <div class="container">
+    <c:if test="${not empty currentDoctor}">
+        <div class="doctor-info-card">
+            <h3>您好，<span class="doctor-name">${currentDoctor.name}</span>！</h3>
+            <p>
+                <strong>您的ID:</strong> ${currentDoctor.id} |
+                <strong>职称:</strong> ${currentDoctor.title} |
+                <strong>所属科室:</strong> ${currentDoctor.department.name}
+            </p>
+            <a href="/logout" class="logout-btn">退出登录</a>
+        </div>
+        <hr style="border: none; border-top: 1px solid #eee; margin-bottom: 20px;">
+    </c:if>
+
+
     <div class="header">
-        <h2>病人信息总览</h2>
-        <a href="/admission/register" class="add-btn">登记新病人</a>
+        <h2><c:if test="${not empty currentDoctor}">您的</c:if>病人信息总览</h2>
     </div>
 
     <table>
