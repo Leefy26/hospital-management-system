@@ -14,7 +14,6 @@ public class DischargeSummaryDTO {
     private List<PatientLabTest> labTests; // 【修正点2】添加 labTests 字段
     private BigDecimal totalFee;
 
-    // --- Getters and Setters ---
 
     public Patient getPatient() {
         return patient;
@@ -32,7 +31,6 @@ public class DischargeSummaryDTO {
         this.prescriptions = prescriptions;
     }
 
-    // 【修正点3】为 labTests 添加 Getter 和 Setter
     public List<PatientLabTest> getLabTests() {
         return labTests;
     }

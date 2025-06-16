@@ -11,8 +11,7 @@ public class HomeController {
      */
     @GetMapping("/")
     public String home() {
-        // 当用户访问首页时，我们不显示一个新页面，
-        // 而是直接将他们“重定向”到病人列表页面。
+        // 重定向到病人列表页面
         return "redirect:/patient/list";
     }
 }

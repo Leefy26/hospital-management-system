@@ -45,7 +45,7 @@
 请遵循以下步骤在本地运行本项目。
 
 ### 1. 环境准备
-确保您的本地环境已安装以下软件：
+确保本地环境已安装以下软件：
 - JDK 17 或更高版本
 - Maven 3.6 或更高版本
 - MySQL 8.x
@@ -62,7 +62,7 @@ git clone [https://github.com/Leefy26/hospital-management-system.git](https://gi
 1.  在本地 MySQL 中手动创建一个空的数据库：`CREATE DATABASE hospital_db;`
 2.  打开 `src/main/resources/application.properties` 文件。
 3.  确保 `spring.jpa.hibernate.ddl-auto` 的值被设置为 `create`。
-4.  修改 `spring.datasource.username` 和 `spring.datasource.password` 为您自己的数据库用户名和密码。
+4.  修改 `spring.datasource.username` 和 `spring.datasource.password` 为自己的数据库用户名和密码。
 5.  启动应用，JPA/Hibernate 会自动为您创建所有的表结构。
 
 #### 方式B (手动执行脚本)

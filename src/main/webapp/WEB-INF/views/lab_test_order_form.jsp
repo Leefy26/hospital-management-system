@@ -21,7 +21,6 @@
         <strong>病人姓名:</strong> ${patient.name} (ID: ${patient.id})
     </div>
 
-    <%-- 【关键】请确保 action 指向 "/labtest/order"，method 是 "post" --%>
     <form action="/labtest/order" method="post">
 
         <input type="hidden" name="patientId" value="${patient.id}">

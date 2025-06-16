@@ -86,7 +86,7 @@ public class DischargeServiceImpl implements DischargeService {
                 .map(PatientLabTest::getFee)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        // 【修正关键点】计算最终的总费用，将处方费和检验费相加
+        // 6. 计算总费用
         BigDecimal totalFee = prescriptionFee.add(labFee);
 
         // 7. 打包成DTO返回

@@ -56,7 +56,6 @@
         </div>
     </c:if>
 
-    <!-- 提交按钮 -->
     <div>
         <input type="submit" value="${action == 'add' ? '确认新增' : '确认修改'}">
     </div>

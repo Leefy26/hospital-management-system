@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>病人住院登记</title>
-    <style> /* 样式保持不变 */
+    <style>
     body { font-family: sans-serif; }
     .container { width: 60%; margin: 20px auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; }
     .form-group { margin-bottom: 15px; }
@@ -113,10 +113,8 @@
 
                 const requestUrl = '/api-test/get-doctors/' + departmentId;
 
-                // 我们依然打印出来，进行最终确认
                 console.log('准备请求的URL是: ' + requestUrl);
 
-                // fetch部分保持不变
                 fetch(requestUrl)
                     .then(response => {
                         if (!response.ok) {

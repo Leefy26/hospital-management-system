@@ -1,6 +1,6 @@
 @echo off
 REM =================================================================
-REM      住院管理信息系统 - MySQL 全量备份脚本 (安全模板)
+REM      住院管理信息系统 - MySQL 全量备份脚本
 REM =================================================================
 
 ECHO.
@@ -44,7 +44,7 @@ ECHO.
 REM 执行 mysqldump 命令
 %MYSQLDUMP_PATH% -u%DB_USER% -p%DB_PASS% %DB_NAME% --add-drop-table --routines --events > "%BACKUP_PATH%\%FILE_NAME%"
 
-REM 检查结果
+REM
 IF %ERRORLEVEL% EQU 0 (
     ECHO [SUCCESS] Backup completed successfully!
 ) ELSE (

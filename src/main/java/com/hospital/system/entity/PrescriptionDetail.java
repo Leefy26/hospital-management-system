@@ -18,14 +18,11 @@ public class PrescriptionDetail {
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal subtotal; // 小计金额
 
-    // --- 关系映射 ---
 
-    // 多条详情属于一张处方主记录
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "prescription_id", nullable = false)
     private Prescription prescription;
 
-    // 一条详情对应一种药品
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "medicine_id", nullable = false)
     private Medicine medicine;

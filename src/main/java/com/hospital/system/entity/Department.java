@@ -6,15 +6,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-// @Entity 注解表明这是一个JPA实体类，它会映射到数据库中的一个表。
 @Entity
-// @Table 注解指定了它映射到哪张表，这里是 'departments' 表。
 @Table(name = "departments")
 public class Department {
 
-    // @Id 表明这是主键字段。
     @Id
-    // @GeneratedValue 定义了主键的生成策略，IDENTITY 表示由数据库自增生成。
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 

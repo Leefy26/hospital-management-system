@@ -9,11 +9,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-// @Service 注解表明这是一个业务逻辑层的组件。
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
 
-    // @Autowired 注解让Spring自动将 DepartmentRepository 的实例注入到这里。
     @Autowired
     private DepartmentRepository departmentRepository;
 

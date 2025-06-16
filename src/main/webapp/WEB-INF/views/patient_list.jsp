@@ -1,18 +1,17 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> <%-- 引入格式化标签库 --%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
     <title>病人信息列表</title>
     <style>
-        /* 请将这些新样式添加到 <style> 标签内 */
         .doctor-info-card {
             background-color: #e9f5ff;
             border: 1px solid #b3d7ff;
             border-radius: 8px;
             padding: 15px 25px;
             margin-bottom: 20px;
-            position: relative; /* 为了登出按钮定位 */
+            position: relative;
         }
         .doctor-info-card h3 {
             margin: 0 0 10px 0;
@@ -92,7 +91,6 @@
                 <td>
                         ${p.admissionDate}
                 </td>
-                    <%-- 这里体现了JPA关系映射的强大之处，可以直接通过 patient 对象获取关联对象的信息 --%>
                 <td>${p.department.name}</td>
                 <td>${p.doctor.name}</td>
                 <td>${p.ward.wardNo}</td>

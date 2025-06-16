@@ -81,18 +81,14 @@
 </div>
 
 <script>
-    // JS代码，用于实现动态添加和移除
     document.getElementById('add-medicine-btn').addEventListener('click', function() {
-        // 1. 找到模板并克隆
         const template = document.getElementById('medicine-row-template').firstElementChild;
         const newRow = template.cloneNode(true);
 
-        // 2. 将克隆的行添加到容器中
         document.getElementById('medicine-container').appendChild(newRow);
     });
 
     function removeMedicineRow(button) {
-        // 移除按钮所在的整个药品行
         button.parentElement.remove();
     }
 </script>

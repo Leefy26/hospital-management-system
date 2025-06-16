@@ -14,7 +14,7 @@ public class PatientLabTest {
     @Column(name = "test_time", nullable = false)
     private LocalDateTime testTime;
 
-    @Lob // @Lob 表示这是一个大文本字段
+    @Lob
     private String result;
 
     @Column(nullable = false, precision = 10, scale = 2)

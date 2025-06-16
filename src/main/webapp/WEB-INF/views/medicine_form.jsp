@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>${action == 'add' ? '新增' : '修改'}药品</title>
-    <style> /* 省略部分通用样式 */
+    <style>
     form { width: 50%; margin: 20px auto; padding: 20px; border: 1px solid #ccc; border-radius: 5px; }
     div { margin-bottom: 15px; }
     label { display: inline-block; width: 100px; }

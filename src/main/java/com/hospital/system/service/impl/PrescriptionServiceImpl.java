@@ -31,7 +31,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     private MedicineRepository medicineRepository;
 
     @Override
-    @Transactional // 开启事务！这是保证数据一致性的关键！
+    @Transactional
     public void createPrescription(Integer patientId, Integer doctorId, String diagnosis,
                                    Integer[] medicineIds, Integer[] quantities, String[] notes) {
 
@@ -83,8 +83,6 @@ public class PrescriptionServiceImpl implements PrescriptionService {
         prescription.setTotalFee(totalFee);
 
         // 5. 保存处方
-        // 因为我们在 Prescription 实体中设置了 CascadeType.ALL，
-        // 所以这里只需要保存主记录，JPA会自动帮我们把所有的详情记录一并保存！
         prescriptionRepository.save(prescription);
     }
 }

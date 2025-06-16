@@ -28,7 +28,6 @@
     <div>
         <label for="usedBeds">已用床位数:</label>
         <input type="number" id="usedBeds" name="usedBeds" value="${ward.usedBeds}" required min="0">
-        <%-- 在真实系统中，“已用床位数”通常由住院和出院流程自动更新，但在这里我们为了维护方便，先让它可以手动修改。 --%>
     </div>
     <div>
         <input type="submit" value="${action == 'add' ? '确认新增' : '确认修改'}">

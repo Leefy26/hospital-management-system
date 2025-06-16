@@ -34,7 +34,6 @@ public class LabTestController {
             return "redirect:/patient/list";
         }
 
-        // 【新增的后台校验逻辑】
         Patient patient = patientOpt.get();
         if ("出院".equals(patient.getStatus())) {
             redirectAttributes.addFlashAttribute("errorMessage", "操作失败：病人 " + patient.getName() + " 已出院，无法为其开立新检验单。");
@@ -43,7 +42,7 @@ public class LabTestController {
         model.addAttribute("patient", patientService.findById(patientId).get());
         model.addAttribute("doctorList", doctorService.findAll());
         model.addAttribute("labItemList", labItemService.findAll());
-        return "lab_test_order_form"; // 需要创建这个JSP页面
+        return "lab_test_order_form";
     }
 
     @PostMapping("/order")

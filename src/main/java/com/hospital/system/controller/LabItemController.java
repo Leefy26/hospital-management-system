@@ -37,9 +37,7 @@ public class LabItemController {
         return "lab_item_form";
     }
 
-    /**
-     * 【修正关键点1】处理新增的表单提交，必须用 @PostMapping
-     */
+
     @PostMapping("/add")
     public String addLabItem(@ModelAttribute LabItem labItem, RedirectAttributes redirectAttributes) {
         labItemService.save(labItem);
@@ -62,9 +60,7 @@ public class LabItemController {
         return "redirect:/labitem/list";
     }
 
-    /**
-     * 【修正关键点2】处理修改的表单提交，也必须用 @PostMapping
-     */
+
     @PostMapping("/update")
     public String updateLabItem(@ModelAttribute LabItem labItem, RedirectAttributes redirectAttributes) {
         labItemService.save(labItem);

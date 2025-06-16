@@ -4,7 +4,6 @@
 <head>
     <title>系统后台管理</title>
 
-    <%-- 【新】引入 Font Awesome 图标库的CSS文件 --%>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <style>
@@ -76,7 +75,7 @@
             font-weight: 600;
         }
 
-        .message { /* 提示信息的样式 */
+        .message {
             padding: 10px 20px;
             margin: 0 auto 30px;
             border-radius: 5px;

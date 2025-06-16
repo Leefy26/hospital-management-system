@@ -39,25 +39,20 @@ public class PatientController {
 
         List<Patient> patientList;
 
-        // 核心逻辑：判断角色
         if ("ROLE_DOCTOR".equals(loggedInUser.getRole())) {
             Optional<Doctor> doctorOpt = doctorRepository.findByUserId(loggedInUser.getId());
 
             if (doctorOpt.isPresent()) {
                 Doctor doctor = doctorOpt.get();
 
-                // 【【【 新增代码 】】】
-                // 将医生本人信息也放入模型，以便在页面上显示
                 model.addAttribute("currentDoctor", doctor);
 
-                // 查询该医生的病人列表
                 patientList = patientService.findByDoctorId(doctor.getId());
             } else {
                 patientList = new ArrayList<>();
                 model.addAttribute("errorMessage", "未找到与您账户关联的医生信息！");
             }
         } else if ("ROLE_ADMIN".equals(loggedInUser.getRole())) {
-            // 管理员逻辑保持不变
             patientList = patientService.findAll();
         } else {
             patientList = new ArrayList<>();
@@ -107,13 +102,10 @@ public class PatientController {
             return "redirect:/patient/list";
         }
 
-        // 1. 获取病人基本信息
         Patient patient = patientOpt.get();
 
-        // 2. 获取该病人的所有处方记录
         List<Prescription> prescriptions = prescriptionRepository.findByPatientId(id);
 
-        // 3. 获取该病人的所有检验记录
         List<PatientLabTest> labTests = patientLabTestRepository.findByPatientId(id);
 
         BigDecimal totalPrescriptionFee = prescriptions.stream()
@@ -124,7 +116,6 @@ public class PatientController {
                 .map(PatientLabTest::getFee)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        // 4. 将所有信息放入模型，传递给视图
         model.addAttribute("patient", patient);
         model.addAttribute("prescriptions", prescriptions);
         model.addAttribute("labTests", labTests);

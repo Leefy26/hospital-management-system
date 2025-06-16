@@ -20,16 +20,13 @@ public class AuthenticationFilter implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
 
-        // 获取请求的URL
         String uri = httpRequest.getRequestURI();
 
-        // 如果是访问登录页面或静态资源，直接放行
         if (uri.equals("/login") || uri.startsWith("/css/") || uri.startsWith("/js/")) {
             chain.doFilter(request, response);
             return;
         }
 
-        // 检查Session中是否有“通行证”
         HttpSession session = httpRequest.getSession(false); // false表示不创建新session
         if (session != null && session.getAttribute("loggedInUser") != null) {
             // 有通行证，放行

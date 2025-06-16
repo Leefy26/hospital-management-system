@@ -21,11 +21,9 @@ public class DoctorController {
     @Autowired
     private DoctorService doctorService;
 
-    // 我们需要科室列表，所以也要注入DepartmentService
     @Autowired
     private DepartmentService departmentService;
 
-    // 显示医生列表
     @GetMapping("/list")
     public String listDoctors(Model model) {
         List<Doctor> doctorList = doctorService.findAll();
@@ -33,12 +31,11 @@ public class DoctorController {
         return "doctor_list";
     }
 
-    // 显示新增医生表单
     @GetMapping("/add")
     public String showAddForm(Model model) {
-        List<Department> departmentList = departmentService.findAll(); // 获取所有科室
+        List<Department> departmentList = departmentService.findAll();
         model.addAttribute("doctor", new Doctor());
-        model.addAttribute("departmentList", departmentList); // 将科室列表传给视图
+        model.addAttribute("departmentList", departmentList);
         model.addAttribute("action", "add");
         return "doctor_form";
     }
@@ -52,7 +49,6 @@ public class DoctorController {
                             @RequestParam String password,
                             RedirectAttributes redirectAttributes) {
         try {
-            // 我们将在下一步创建一个新的 Service 方法来处理这个复杂逻辑
             doctorService.createDoctorAndUser(doctor, username, password);
             redirectAttributes.addFlashAttribute("successMessage", "医生 " + doctor.getName() + " 及登录账户创建成功！");
         } catch (Exception e) {
@@ -61,12 +57,11 @@ public class DoctorController {
         return "redirect:/doctor/list";
     }
 
-    // 显示修改医生表单
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable Integer id, Model model) {
         Optional<Doctor> doctor = doctorService.findById(id);
         if (doctor.isPresent()) {
-            List<Department> departmentList = departmentService.findAll(); // 同样需要科室列表
+            List<Department> departmentList = departmentService.findAll();
             model.addAttribute("doctor", doctor.get());
             model.addAttribute("departmentList", departmentList);
             model.addAttribute("action", "edit");
@@ -75,14 +70,12 @@ public class DoctorController {
         return "redirect:/doctor/list";
     }
 
-    // 更新医生信息
     @PostMapping("/update")
     public String updateDoctor(@ModelAttribute Doctor doctor) {
         doctorService.save(doctor);
         return "redirect:/doctor/list";
     }
 
-    // 删除医生
     @GetMapping("/delete/{id}")
     public String deleteDoctor(@PathVariable Integer id) {
         doctorService.deleteById(id);

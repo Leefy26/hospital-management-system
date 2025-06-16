@@ -8,6 +8,5 @@ import java.util.List;
 
 @Repository
 public interface PatientLabTestRepository extends JpaRepository<PatientLabTest, Integer> {
-    // 根据病人ID查找所有检验记录
     List<PatientLabTest> findByPatientId(Integer patientId);
 }

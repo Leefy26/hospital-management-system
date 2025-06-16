@@ -8,7 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
-    // Spring Data JPA 会根据方法名自动生成查询
-    // 我们需要一个根据用户名查找用户的方法
     Optional<User> findByUsername(String username);
 }

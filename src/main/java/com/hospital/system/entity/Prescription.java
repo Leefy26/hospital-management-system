@@ -14,7 +14,6 @@ public class Prescription {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    // 临床诊断
     private String diagnosis;
 
     @Column(name = "created_at", nullable = false)
@@ -23,21 +22,16 @@ public class Prescription {
     @Column(name = "total_fee", precision = 10, scale = 2)
     private BigDecimal totalFee;
 
-    // --- 关系映射 ---
 
-    // 一张处方属于一个病人
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "patient_id", nullable = false)
     private Patient patient;
 
-    // 一张处方由一个医生开立
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "doctor_id")
     private Doctor doctor;
 
-    // 一张处方包含多条药品详情
-    // CascadeType.ALL: 对处方的所有操作（保存、删除等）都会级联到处方详情
-    // orphanRemoval = true: 从这个列表中移除的详情记录，也会从数据库中删除
+
     @OneToMany(mappedBy = "prescription", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PrescriptionDetail> details = new ArrayList<>();
 

@@ -14,13 +14,13 @@ public class Doctor {
 
     private String title; // 职称
 
-    // 多对一关系：多个医生可以属于一个科室
     @ManyToOne(fetch = FetchType.LAZY) // LAZY表示懒加载，性能更好
     @JoinColumn(name = "department_id", nullable = false) // 通过 department_id 字段进行关联
     private Department department;
-    // 一个医生对应一个登录用户
+
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
+
     private User user;
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }

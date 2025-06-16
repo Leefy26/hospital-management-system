@@ -37,8 +37,6 @@ public class Patient {
     @Column(nullable = false)
     private String status; // 病人状态 (住院/出院)
 
-    // --- 关系映射 ---
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "department_id")
     private Department department;
@@ -50,9 +48,6 @@ public class Patient {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ward_id")
     private Ward ward;
-
-    // --- Getters and Setters ---
-    // 小主请使用IDE自动生成所有字段的Getters和Setters
 
 
     public Integer getId() {

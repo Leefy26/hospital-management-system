@@ -20,7 +20,6 @@ public class DoctorServiceImpl implements DoctorService {
     @Autowired
     private DoctorRepository doctorRepository;
 
-    // 【新增注入】
     @Autowired
     private UserRepository userRepository;
 
@@ -46,9 +45,8 @@ public class DoctorServiceImpl implements DoctorService {
         doctorRepository.deleteById(id);
     }
 
-    // 【新增方法】
     @Override
-    @Transactional // 开启事务，保证两步操作要么都成功，要么都失败
+    @Transactional
     public void createDoctorAndUser(Doctor doctor, String username, String password) {
         // 1. 检查用户名是否已存在
         if (userRepository.findByUsername(username).isPresent()) {
@@ -59,7 +57,7 @@ public class DoctorServiceImpl implements DoctorService {
         User user = new User();
         user.setUsername(username);
         user.setPassword(passwordEncoder.encode(password)); // 加密密码
-        user.setRole("ROLE_DOCTOR"); // 新建的都是医生角色
+        user.setRole("ROLE_DOCTOR");
         user.setEnabled(true);
         User savedUser = userRepository.save(user); // 先保存User，获取ID
 

@@ -18,13 +18,11 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
-    // 显示登录页面
     @GetMapping("/login")
     public String showLoginPage() {
         return "login";
     }
 
-    // 处理登录表单提交
     @PostMapping("/login")
     public String processLogin(@RequestParam String username,
                                @RequestParam String password,
@@ -37,10 +35,8 @@ public class LoginController {
 
         if (userOpt.isPresent()) {
             User user = userOpt.get();
-            // 登录成功！将用户信息存入 Session，作为“通行证”
             session.setAttribute("loggedInUser", user);
 
-            // 根据角色跳转到不同页面
             if ("ROLE_ADMIN".equals(user.getRole())) {
                 return "redirect:/admin/dashboard"; // 跳转到管理员主页
             } else if ("ROLE_DOCTOR".equals(user.getRole())) {
@@ -48,19 +44,16 @@ public class LoginController {
             }
         }
 
-        // 登录失败，返回登录页并显示错误信息
         model.addAttribute("loginError", "用户名或密码错误！");
         return "login";
     }
 
-    // 处理登出请求
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate(); // 销毁Session，即撕掉“通行证”
         return "redirect:/login";
     }
 
-    // 在 LoginController.java 中
     @GetMapping("/admin/dashboard")
     public String showAdminDashboard() {
         return "admin_dashboard";
