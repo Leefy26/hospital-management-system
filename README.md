@@ -52,7 +52,7 @@
 
 ### 2. 克隆项目
 ```bash
-git clone [https://github.com/YourUsername/hospital-management-system.git](https://github.com/YourUsername/hospital-management-system.git)
+git clone [https://github.com/Leefy26/hospital-management-system.git](https://github.com/Leefy26/hospital-management-system.git)
 ```
 
 ### 3. 数据库设置
